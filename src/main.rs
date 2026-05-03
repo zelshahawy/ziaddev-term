@@ -4,37 +4,52 @@ use std::{
     thread,
 };
 
-use comfy_table::{presets::UTF8_FULL, Table};
-use owo_colors::OwoColorize;
+use comfy_table::{
+    Attribute, Cell, Color, Table,
+    presets::UTF8_BORDERS_ONLY,
+};
 
 fn terminal_page() -> String {
     let mut table = Table::new();
 
     table
-        .load_preset(UTF8_FULL)
+        .load_preset(UTF8_BORDERS_ONLY)
         .set_header(vec![
-            "Link".cyan().bold().to_string(),
-            "URL".cyan().bold().to_string(),
+            Cell::new("Link")
+                .fg(Color::Cyan)
+                .add_attribute(Attribute::Bold),
+            Cell::new("URL")
+                .fg(Color::Cyan)
+                .add_attribute(Attribute::Bold),
         ])
         .add_row(vec![
-            "GitHub".green().bold().to_string(),
-            "https://github.com/zelshahawy".to_string(),
+            Cell::new("GitHub")
+                .fg(Color::Green)
+                .add_attribute(Attribute::Bold),
+            Cell::new("https://github.com/zelshahawy")
+                .fg(Color::Blue),
         ])
         .add_row(vec![
-            "Website".green().bold().to_string(),
-            "https://www.ziadelshahawy.dev/".to_string(),
+            Cell::new("Website")
+                .fg(Color::Green)
+                .add_attribute(Attribute::Bold),
+            Cell::new("https://www.ziadelshahawy.dev/")
+                .fg(Color::Blue),
         ])
         .add_row(vec![
-            "Blog".green().bold().to_string(),
-            "https://www.ziadelshahawy.dev/blog/".to_string(),
+            Cell::new("Blog")
+                .fg(Color::Green)
+                .add_attribute(Attribute::Bold),
+            Cell::new("https://www.ziadelshahawy.dev/blog/")
+                .fg(Color::Blue),
         ]);
 
     format!(
-        "\n{}\n{}\n\n{}\n\n{}\n\n",
-        "ziadelshahawy.dev".cyan().bold(),
-        "..................".dimmed(),
+        "\n{}\n{}\n\n{}\n\n{}\n",
+        "\x1b[1;36mziadelshahawy.dev\x1b[0m",
+        "\x1b[2m..................\x1b[0m",
         table,
-        "thanks for visiting :)".magenta()
+        "\x1b[35mthanks for visiting :)\x1b[0m"
     )
 }
 
